@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k3s-demo-app
+  namespace: default
+  labels:
+    app: k3s-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: k3s-demo
+  template:
+    metadata:
+      labels:
+        app: k3s-demo
+    spec:
+      containers:
+      - name: web
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
